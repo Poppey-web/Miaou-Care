@@ -220,7 +220,9 @@ def check_inventory_alerts():
                         (f"Stock bas: {row['item']} ({int(days_left)}j)", "STOCK", priority, datetime.now().strftime('%Y-%m-%d %H:%M')))
     conn.commit()
 
-check_inventory_alerts()
+if 'alerts_checked' not in st.session_state:
+    check_inventory_alerts()
+    st.session_state['alerts_checked'] = True
 
 # --- HEADER ---
 st.markdown("""
